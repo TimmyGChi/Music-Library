@@ -1,0 +1,13 @@
+<div class="container">
+    <div *ngIf='!song' class="header">
+        <h3> Please select a song! </h3>
+    </div>
+    <div *ngIf='song'>
+        <span class="title">Title:</span> {{song.title}} <br>
+        <span class="title">Artist:</span> {{song.artist}} <br>
+        <span class="title">Album:</span> {{song.album}} <br>
+        <span class="title">Genre:</span> {{song.genre}} <br>
+        <span class="title">About:</span> {{song.description}} <br>
+        <span class="title">Release Date:</span> {{song.releaseDate}}
+    </div>
+</div>

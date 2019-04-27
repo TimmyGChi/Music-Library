@@ -1,0 +1,19 @@
+<div class="modal-header">
+  <h4 class="modal-title">Add New Music!</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="form">
+    <span class="form-label" for="title">Title: </span> <input class="form-input" formControlName="title" type="text">
+    <span class="form-label" for="artist">Artist: </span> <input class="form-input" formControlName="artist" type="text">
+    <span class="form-label" for="album">Album: </span> <input class="form-input" formControlName="album" type="text">
+    <span class="form-label" for="genre">Genre: </span> <input class="form-input" formControlName="genre" type="text">
+    <span class="form-label" for="release">Release Date: </span> <input class="form-input" formControlName="releaseDate" type="text">
+    <span class="form-label" for="about">About: </span> <textarea class="form-input" formControlName="description" type="text"></textarea>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="submit()">Submit</button>
+</div>
