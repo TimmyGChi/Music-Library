@@ -19,15 +19,6 @@
       "description": "In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet."
     },
     {
-      "id": 3,
-      "title": "Känd från TV",
-      "artist": "Gaston Butland",
-      "releaseDate": "03/17/2002",
-      "album": "Safe Bulkers, Inc",
-      "genre": "Comedy",
-      "description": "Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat."
-    },
-    {
       "id": 4,
       "title": "Go, Go Second Time Virgin (Yuke yuke nidome no shojo)",
       "artist": "Garner Jonke",
@@ -8999,15 +8990,6 @@
       "album": "Granite Real Estate Inc.",
       "genre": "Drama",
       "description": "Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
-    },
-    {
-      "title": "I'm a Mess",
-      "artist": "Bebe Rexha",
-      "album": "Expectations",
-      "genre": "Pop",
-      "releaseDate": "02/20/2017",
-      "description": "Listening to this song on the plane ride to San Francisco.",
-      "id": 1001
     }
   ]
 }

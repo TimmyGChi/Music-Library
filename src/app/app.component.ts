@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
 
   }
   private readonly LIBRARY_URL = 'http://localhost:3000/library';
-  
+
   private title = "Tim's Music Library";
   private gridOptions: GridOptions = {};
   private columnDefs: any[] = [];
@@ -26,24 +26,22 @@ export class AppComponent implements OnInit {
   private queryChanged: Subject<any> = new Subject<any>();
   private query: string = '';
 
-  // private songSelectorToggler: string = 'Hide Song Selector';
-  private hideSelector
-
-
   @ViewChild('songSelector') songSelector: SongSelectorComponent;
   @ViewChild('searchField') searchField: ElementRef;
   @ViewChild('modal') modalComponent: NgbdModalComponent;
 
   ngOnInit(): void {
+    // setup debounce for search input field.
     this.queryChanged.pipe(debounceTime(500))
       .subscribe((query: string) => {
-        this.setRowData(query);
+        this.query = query;
+        this.setRowData(this.query);
       });
   }
 
   onGridReady() {
     this.setColumnDefinitions();
-    this.setRowData();
+    this.setRowData(this.query);
 
     this.gridOptions.api.sizeColumnsToFit();
   }
@@ -54,21 +52,21 @@ export class AppComponent implements OnInit {
 
   private setColumnDefinitions() {
     this.columnDefs = [
-      {checkboxSelection: true, headerName: 'Title', field: 'title', sortable: true, filter: true},
-      {headerName: 'Artist', field: 'artist', sortable: true, filter: true },
-      {headerName: 'Album', field: 'album', sortable: true, filter: true },
-      {headerName: 'Genre', field: 'genre', sortable: true, filter: true },
-      {headerName: 'Release Date', field: 'releaseDate', sortable: true, filter: true }
+      { checkboxSelection: true, headerName: 'Title', field: 'title', sortable: true, filter: true },
+      { headerName: 'Artist', field: 'artist', sortable: true, filter: true },
+      { headerName: 'Album', field: 'album', sortable: true, filter: true },
+      { headerName: 'Genre', field: 'genre', sortable: true, filter: true },
+      { headerName: 'Release Date', field: 'releaseDate', sortable: true, filter: true }
     ];
 
     this.gridOptions.api.setColumnDefs(this.columnDefs);
   }
 
-  private setRowData(filter?: string) {
+  private setRowData(filter: string) {
     let url = this.LIBRARY_URL;
 
     if (filter) {
-      url = `${this.LIBRARY_URL}?q=${filter}`; 
+      url = `${this.LIBRARY_URL}?q=${filter}`;
     }
 
     this.libraryService.get(url)
@@ -76,21 +74,33 @@ export class AppComponent implements OnInit {
         this.rowData = res;
         this.gridOptions.api.setRowData(this.rowData);
       });
-    
+
   }
 
+  /**
+   * Debounce query search.
+   */
   private search() {
     this.queryChanged.next(this.searchField.nativeElement.value);
   }
 
+  /**
+   * Remove selected music.
+   */
   private delete() {
     let row = this.gridOptions.api.getSelectedNodes()[0];
     if (!row) {
       return;
     }
+
     this.libraryService.delete(`${this.LIBRARY_URL}/${row.data.id}`)
       .subscribe(res => {
         console.log('Delete');
+        this.setRowData(this.query);
       });
+  }
+
+  public refreshView() {
+    this.setRowData(this.query);
   }
 }

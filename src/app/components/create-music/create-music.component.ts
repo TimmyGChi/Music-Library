@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { LibraryService } from 'src/app/services/library.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -12,7 +12,8 @@ export class CreateMusicComponent implements OnInit {
   private readonly LIBRARY_URL = 'http://localhost:3000/library';
 
   private form: FormGroup;
-  
+
+  @Input() parent: any;
   
   constructor(private activeModal: NgbActiveModal,
               private libraryService: LibraryService,
@@ -25,14 +26,21 @@ export class CreateMusicComponent implements OnInit {
     this.buildFormModel();
   }
 
+  /**
+   * Post a music using Form values.
+   */
   submit() {
-    console.log('submit');
     this.libraryService.post(this.LIBRARY_URL, this.form.value)
       .subscribe(res => {
+        console.log('submitted');
+        this.parent.refreshView();
         this.activeModal.close('Saved');
       });
   }
 
+  /**
+   * Build Form Controls for each field.
+   */
   private buildFormModel() {
     let model = {};
 
