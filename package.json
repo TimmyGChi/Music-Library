@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --live-reload=false",
     "json-server": "json-server --watch ./src/assets/data/mock-data.json --port 3000",
     "build": "ng build",
     "test": "ng test",
